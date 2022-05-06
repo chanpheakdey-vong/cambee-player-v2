@@ -231,6 +231,10 @@ export class PracticeSetComponent {
                 this.nextCardMeaning();
             }
         }, 2000);
+        if (choice.correct && this.curIdx_meaning >= this.card_meaning.length - 1) {
+            this.card_active = "spelling";
+            this.txt.nativeElement.focus();
+        }
     }
 
     nextCardMeaning() {
@@ -244,9 +248,7 @@ export class PracticeSetComponent {
             this.card_active = "spelling";
             this.done_meaning = true;
             this.audService.loadSrc(this.audioCtrl.nativeElement, this.card_spelling[this.curIdx_spelling].audio);
-            setTimeout(() => {
-                this.txt.nativeElement.focus();    
-            }, 100);
+            this.txt.nativeElement.focus();
         }
     }
 
@@ -289,12 +291,12 @@ export class PracticeSetComponent {
             this.alertMsg.show = false;
             if (card.correct) {
                 this.data.spelling = "";
-                this.txt.nativeElement.focus();
                 this.incorrect_num = 0;
                 this.audService.revokeAudio(this.card_spelling[this.curIdx_spelling].audio);
                 this.nextCardSpelling();
             }
         }, 2000);
+        if (card.correct) this.txt.nativeElement.focus();
     }
     
     backPractice() {
@@ -302,9 +304,7 @@ export class PracticeSetComponent {
         if (this.done_meaning) {
             this.audService.loadSrc(this.audioCtrl.nativeElement, this.card_spelling[this.curIdx_spelling].audio);
             this.data.spelling = "";
-            setTimeout(() => {
-                this.txt.nativeElement.focus();    
-            }, 100);
+            this.txt.nativeElement.focus();
         }
     }
 
