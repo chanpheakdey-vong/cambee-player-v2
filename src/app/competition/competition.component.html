@@ -1,0 +1,81 @@
+<div *ngIf="!hasSubmit">
+    <form #form="ngForm">
+        <div class="nav-header-fixed">
+            <div class="stage-title scroll-x align-l" style="text-align: center;">
+                <span>
+                    Competition
+                </span>
+                <span class="flt-r">{{doubleDigit(countDown.minute)}}:{{doubleDigit(countDown.second)}}</span>
+                <div class="clr-flt"></div>
+            </div>
+        </div>
+        <div class="nav-body-fixed" style="padding-bottom: 200px;">
+            <div class="nav-body-fixed-548 align-c">
+                <div class="pad-1">
+                    <div *ngIf="loaded && !data.checkRemainTime">
+                        <audio style="opacity: 0; height: 1px" controls #audioCtrl
+                            *ngIf="audio[meta[curIdx].audioSrc]"></audio><br />
+                        <i class="fas fa-volume-up sound mg-r-03" style="vertical-align: top;" (click)="play()"></i>
+                        <div class="def-box">
+                            <span class="tag">{{curIdx+1}}/{{meta.length}}</span>
+                            <div class="mg-t-1" style="min-height: 80px;">({{meta[curIdx].partOfSpeech}}) {{meta[curIdx].definition}}</div>
+                        </div>
+                    </div>
+                    <div class="mg-t-2" [hidden]="!loaded || data.checkRemainTime">
+                        <input autofocus #txt class="input txt" name="txtvalue"
+                            autocapitalize="off" 
+                            autocomplete="off"
+                            spellcheck="false" 
+                            autocorrect="off"
+                            type="password"
+                            onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false"
+                            [(ngModel)]="data.value" style="text-align:center; background-color: black; background-color: rgba(0,0,0,0.8); padding:1.5em 2.5em" />
+                    </div>
+                    <div *ngIf="loaded && !data.checkRemainTime">
+                        <!-- <button type="button" class="btn-inline" (click)="skip()">Skip</button> -->
+                        <button style="background-color: rgba(255,255,255,0.52); text-transform: uppercase" type="submit" class="btn-inline" (click)="ok(txt.value)">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- <div class="nav-footer-fixed" [hidden]="!loaded || data.checkRemainTime">
+        <div class="simple-keyboard"></div>
+    </div> -->
+
+    <div *ngIf="data.checkStart && !data.checkRemainTime">
+        <div class="popup-panel"></div>
+        <button class="btn-inline start-btn" (click)="start()">Start Now</button>
+    </div>
+
+    <div *ngIf="data.checkRemainTime">
+        <div class="popup-panel"></div>
+        <div class="fixed-center" *ngIf="remainingStart.minute > 0 || remainingStart.second > 0">
+            <div>Remaining Time</div>
+            <div>{{doubleDigit(remainingStart.minute)}} : {{doubleDigit(remainingStart.second)}}</div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="hasSubmit">
+    <div class="nav-body-fixed">
+        <div class="nav-body-fixed-548 align-c">
+            <div class="pad-1 mg-t-1" *ngIf="!isMock">
+                <div>THANK YOU</div>
+                <div>You have completed the Elimination round in ACE Spelling Bee.</div>
+                <div>The result will be announced later.</div>
+            </div>
+            <div class="pad-1 mg-t-1" *ngIf="isMock">
+                <div>THANK YOU</div>
+                <div>This is the end of the mock-up.</div>
+                <div>Good luck with the Elimination round.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<loader *ngIf="submit_loading"></loader>
+<progress-loader #progress [hidden]="data.checkRemainTime"></progress-loader>
+<retry *ngIf="retry" (retry)="getAudio()"></retry>
+<msg-box #msgBox></msg-box>

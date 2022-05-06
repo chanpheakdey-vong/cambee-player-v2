@@ -1,0 +1,28 @@
+<div class="nav-header-fixed">
+    <div class="stage-title scroll-x align-l" (click)="location.back()">
+        <i class="fas fa-arrow-left back-ctrl mg-r-10"></i>
+        <span>
+            {{type}}
+        </span>
+    </div>
+</div>
+
+<div class="nav-body-fixed btm-0 slide-in-bottom">
+    <div class="nav-body-fixed-548 w-100pc align-c">
+        <div class="mg-t-2">Please select a set</div>
+        <div class="mg-tb-2">
+            <div *ngFor="let s of set.sets[level]">
+                <ng-container *ngFor="let i of s.row">
+                    <div class="hex" [class.completed]="set.isCompleted(i, type)" [class.locked]="!set.isEnable(level, i.id, type)" [class.op-1]="set.isEnable(level, i.id, type)" [class.inv]="i.hidden" (click)="selectSet(i)">
+                        <span class="fill"></span>
+                        <span>{{i.no}}</span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<loader-no-bg *ngIf="set.loading"></loader-no-bg>
+<retry *ngIf="set.retry" (retry)="set.getSet(level)"></retry>
+<msg-box #msgBox></msg-box>

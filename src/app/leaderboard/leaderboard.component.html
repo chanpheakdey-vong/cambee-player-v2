@@ -1,0 +1,56 @@
+<div class="nav-header-fixed">
+    <div class="stage-title scroll-x align-l" (click)="back()">
+        <i class="fas fa-arrow-left back-ctrl mg-r-10"></i>
+        <span>
+            Leaderboard
+        </span>
+    </div>
+</div>
+<div class="nav-body-fixed btm-0">
+    <div class="nav-body-fixed-548 w-100pc slide-in-bottom" *ngIf="loaded">
+        <div class="mg-tb-2 align-c">
+            <!-- <div class="fs-1-3 align-c">Leaderboard</div> -->
+            <div class="lb-top" *ngIf="leaderboard.length > 1">
+                2<br />
+                <i class="fas fa-medal lb-silver"></i>
+                <div class="profile-img fs-1-3" [style.background-image]="'url(' + leaderboard[1].photo + ')'"></div>
+                <div>{{leaderboard[1].name}}</div>
+                <div class="fs-09">{{leaderboard[1].sets}} set / {{leaderboard[1].time}} mins</div>
+            </div>
+            <div class="lb-top" *ngIf="leaderboard.length > 0">
+                1<br />
+                <i class="fas fa-trophy lb-gold"></i>
+                <div class="profile-img fs-1-7" [style.background-image]="'url(' + leaderboard[0].photo + ')'"></div>
+                <div>{{leaderboard[0].name}}</div>
+                <div class="fs-09">{{leaderboard[0].sets}} set / {{leaderboard[0].time}} mins</div>
+            </div>
+            <div class="lb-top" *ngIf="leaderboard.length > 2">
+                3<br />
+                <i class="fas fa-medal lb-copper"></i>
+                <div class="profile-img fs-1-3" [style.background-image]="'url(' + leaderboard[2].photo + ')'"></div>
+                <div>{{leaderboard[2].name}}</div>
+                <div class="fs-09">{{leaderboard[2].sets}} set / {{leaderboard[2].time}} mins</div>
+            </div>
+        </div>
+
+        <ng-container *ngFor="let l of leaderboard; let i = index">
+            <div class="lb-box" *ngIf="i > 2">
+                <div class="profile-img" [style.background-image]="'url(' + l.photo + ')'"></div>
+                <div class="info-de">
+                    <div class="info-r">{{l.sets}} set / {{l.time}} mins</div>
+                    <div class="info-l">{{i+1}}. {{l.name}}</div>
+                </div>
+                <div class="clr-flt"></div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<!-- <div class="lb-box lb-fixed-box">
+    <div class="profile-img"></div>
+    <div class="info-de">
+        <div class="info-r">4 set/ 40 mins</div>
+        <div class="info-l">89. Sokhom Ith</div>
+    </div>
+    <div class="clr-flt"></div>
+</div> -->

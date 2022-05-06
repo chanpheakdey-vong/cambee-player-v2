@@ -1,0 +1,10 @@
+<div class="popup-panel" *ngIf="show"></div>
+<div class="popup-box" *ngIf="show">
+    <div class="popup-body">
+        <div class="popup-title">{{msg.title}}</div>
+        <div>{{msg.msg}}</div>
+    </div>
+    <div class="popup-footer fs-09">
+        <button type="button" class="popup-btn-block" (click)="onClose()">Close</button>
+    </div>
+</div>

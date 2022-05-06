@@ -1,0 +1,22 @@
+<div class="nav-body-fixed btm-0 slide-in-bottom" *ngIf="level.loaded">
+    <div class="nav-body-fixed-548 w-100pc">
+        <div class="shape-box" [class.locked]="!level.isEnable(i)" *ngFor="let l of level.levels; let i = index"
+            (click)="selectLevel(l, i)">
+            <img class="shape-bee" [src]="l.no % 2 == 0 ? 'assets/img/bee3.png' : 'assets/img/bee1.png'" />
+            <div class="hex"><span class="fill"></span>{{l.no}}</div>
+            <div class="shape-d">
+                <div class="shape-title">{{l.name}}</div>
+                <div class="progress-rec-box">
+                    <div class="progress-rec">
+                        <div class="progress-rec-val" [style.width]="set.getPercentOfPractice(l.id) + '%'"></div>
+                    </div>
+                    <span *ngIf="set.getTotalOfSet(l.id)">{{set.getNumberOfCompletedPractice(l.id)}}/{{set.getTotalOfSet(l.id)}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<loader-no-bg *ngIf="level.loading"></loader-no-bg>
+<retry *ngIf="level.retry" (retry)="level.getLevel()"></retry>
+<msg-box #msgBox></msg-box>

@@ -1,0 +1,11 @@
+<div *ngIf="show">
+    <div class="popup-panel"></div>
+    <div class="progress">
+        <svg>
+            <circle cx="70" cy="70" r="70">
+            </circle>
+            <circle cx="70" cy="70" r="70" [style.stroke-dashoffset]="getOffset()"></circle>
+        </svg>
+        <div class="number">{{progress}}%</div>
+    </div>
+</div>

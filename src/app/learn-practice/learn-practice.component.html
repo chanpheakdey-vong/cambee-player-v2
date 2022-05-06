@@ -1,0 +1,49 @@
+<div class="nav-header-fixed">
+    <div class="stage-title scroll-x align-l" (click)="location.back()">
+        <i class="fas fa-arrow-left back-ctrl mg-r-10"></i>
+        <span>
+            {{getLevelName()}}
+        </span>
+    </div>
+</div>
+
+<div class="nav-body-fixed btm-0 slide-in-bottom">
+    <div class="nav-body-fixed-548 w-100pc">
+        <div class="shape-box" routerLink="/choose-set" [queryParams]="{type: 'learning'}" queryParamsHandling="merge">
+            <img class="shape-bee" src="assets/img/bee1.png">
+            <div class="hex"><span class="fill"></span>01</div>
+            <div class="shape-d">
+                <div class="shape-title">Learn</div>
+                <div class="shape-desc">Start Improving your vocabulary</div>
+                <div class="progress-rec-box">
+                    <div class="progress-rec">
+                        <div class="progress-rec-val" [style.width]="set.getPercentOfLearning(level) + '%'"></div>
+                    </div>
+                    <span *ngIf="set.getTotalOfSet(level)">{{set.getNumberOfCompletedLearning(level)}}/{{set.getTotalOfSet(level)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="shape-box" routerLink="/choose-set" [queryParams]="{type: 'practice'}" queryParamsHandling="merge">
+            <img class="shape-bee" src="assets/img/bee3.png">
+            <div class="hex"><span class="fill"></span>02</div>
+            <div class="shape-d">
+                <div class="shape-title">Practice</div>
+                <div class="shape-desc">Put your knowledge into practice</div>
+                <div class="progress-rec-box">
+                    <div class="progress-rec">
+                        <div class="progress-rec-val" [style.width]="set.getPercentOfPractice(level) + '%'"></div>
+                    </div>
+                    <span *ngIf="set.getTotalOfSet(level)">{{set.getNumberOfCompletedPractice(level)}}/{{set.getTotalOfSet(level)}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="shape-box" routerLink="/leaderboard" queryParamsHandling="merge">
+            <img class="shape-bee" src="assets/img/bee1.png">
+            <div class="hex"><span class="fill"></span>03</div>
+            <div class="shape-d">
+                <div class="shape-title">Leaderboard</div>
+                <div class="shape-desc">See your ranking</div>
+            </div>
+        </div>
+    </div>
+</div>

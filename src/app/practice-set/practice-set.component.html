@@ -1,0 +1,119 @@
+<complete-practice-set [minute]="practice_duration.minute" [second]="practice_duration.second" [backnum]="backnum" *ngIf="done_practice"></complete-practice-set>
+<audio style="opacity: 0; height: 1px" controls #audioCtrl></audio><br />
+<div class="nav-header-fixed" *ngIf="!done_practice">
+    <div class="stage-title scroll-x align-l" (click)="back()">
+        <i class="fas fa-arrow-left back-ctrl mg-r-10"></i>
+        <span>
+            Practice
+        </span>
+        <span class="flt-r">Set {{setNo}}</span>
+    </div>
+</div>
+<div *ngIf="!done_practice">
+    <div [ngSwitch]="card_active">
+        <div class="nav-body-fixed btm-0" *ngSwitchCase="'meaning'">
+            <div class="nav-body-fixed-548" *ngIf="isLoaded()">
+                <div class="mg-tb-2 align-c">Choose the Correct Word</div>
+                <div class="slide-in-bottom" *ngIf="loaded_next">
+                    <div class="align-c">{{card_meaning[curIdx_meaning].definition}}</div>
+                    <div class="mg-t-1 shape-set-box">
+                        <div class="shape-box choice-set" *ngFor="let c of card_meaning[curIdx_meaning].choice" [class.correct]="c.correct" [class.incorrect]="c.correct == false" (click)="checkAnswer(card_meaning[curIdx_meaning], c)">
+                            <div class="hex"><span class="fill"></span>{{c.text}}</div>
+                            <div class="shape-d">
+                                <div class="shape-title cap">
+                                    <div *ngFor="let t of c.value.split(',')">
+                                        {{t}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'learning'">
+            <div class="nav-body-fixed" style="bottom: 95px;">
+                <div class="nav-body-fixed-548 align-c w-100pc" *ngIf="loaded_learning">
+                    <div class="fs-1-3 tracking-in-contract-bck cap">
+                        <div *ngFor="let t of card_learning.answer.split(',')">
+                            {{t}}
+                        </div>
+                    </div>
+                    <div class="mg-t-1 slide-in-bottom">
+                        <div class="shape-box shape-box-inline">
+                            <img class="shape-bee" src="assets/img/bee1.png">
+                            <div class="shape-d">
+                                <div class="shape-title">Part of Speech</div>
+                                <div class="shape-desc">{{card_learning.partOfSpeech}}</div>
+                            </div>  
+                        </div>
+                        <div class="shape-box shape-box-inline">
+                            <img class="shape-bee" src="assets/img/bee1.png">
+                            <div class="shape-d">
+                                <div class="shape-title">Synonym</div>
+                                <div class="shape-desc">{{card_learning.synonym}}</div>
+                            </div>  
+                        </div>
+                        <div class="shape-box shape-box-inline w-85-pc">
+                            <img class="shape-bee" src="assets/img/bee1.png">
+                            <div class="shape-d">
+                                <div class="shape-title">Definition</div>
+                                <div class="shape-desc">{{card_learning.definition}}</div>
+                            </div>  
+                        </div>
+                        <div class="shape-box shape-box-inline w-85-pc">
+                            <img class="shape-bee" src="assets/img/bee1.png">
+                            <div class="shape-d">
+                                <div class="shape-title">Example</div>
+                                <div class="shape-desc">{{card_learning.example}}</div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-ctrl-box">
+                <div class="footer-ctrl">
+                    <i class="fas fa-volume-up sound" (click)="audioCtrl.play()"></i>
+                </div>
+                <span class="footer-ctrl-r" (click)="backPractice()"><span class="expand-effect">Back</span></span>
+            </div>
+        </div>
+
+        <div [hidden]="card_active != 'spelling'" class="align-c">
+            <form #form="ngForm">
+                <div class="nav-body-fixed btm-0">
+                    <div class="nav-body-fixed-548">
+                        <div class="mg-tb-2">Spell the word 
+                        </div>        
+                        <div class="pad-1">
+                            <i class="fas fa-volume-up sound mg-r-03" style="vertical-align: top;" (click)="audioCtrl.play()"></i>
+                            <div class="def-box" *ngIf="card_spelling[curIdx_spelling]" style="min-height: 80px;">{{card_spelling[curIdx_spelling].definition}}</div>
+                            <div class="mg-t-2">
+                                <input autofocus #txt type="password" class="input txt" name="txtvalue" autocapitalize="off" autocomplete="off" spellcheck="false"
+                                    autocorrect="off" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
+                                    onDrag="return false" onDrop="return false" [(ngModel)]="data.spelling"
+                                    style="text-align:center; background-color: black; background-color: rgba(0,0,0,0.8); padding:1.5em 2.5em" />
+                            </div>
+                            <div class="mg-t-2">
+                                <button type="submit" style="background-color: rgba(255,255,255,0.52); text-transform: uppercase" class="btn-inline" (click)="checkAnswerSpelling(card_spelling[curIdx_spelling], data.spelling)">Ok</button>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="alertMsg.show">
+            <div class="popup-panel"></div>
+            <div class="rs-box bounce-in-fwd" [class.incorrect]="!alertMsg.correct">
+                <i class="far i" [class.fa-check-circle]="alertMsg.correct" [class.fa-times-circle]="!alertMsg.correct"></i>
+                <div class="align-c">{{alertMsg.msg}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<loader-no-bg *ngIf="isLoading()"></loader-no-bg>
+<retry *ngIf="isRetry()" (retry)="retryReq()"></retry>
+<loader *ngIf="submit_loading"></loader>
+<msg-box #msgBox></msg-box>

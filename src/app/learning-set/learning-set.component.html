@@ -1,0 +1,67 @@
+<complete-learn-set *ngIf="done_learning"></complete-learn-set>
+<audio style="opacity: 0; height: 1px" controls #audioCtrl></audio><br />
+<div *ngIf="!started && isLoaded()">
+    <div class="popup-panel"></div>
+    <button class="btn-inline start-btn" (click)="start()">Start Learning</button>
+</div>
+<div class="nav-header-fixed" *ngIf="!done_learning && started">
+    <div class="stage-title scroll-x align-l" (click)="location.back()">
+        <i class="fas fa-arrow-left back-ctrl mg-r-10"></i>
+        <span>
+            Learning
+        </span>
+        <span class="flt-r">Set {{setNo}}</span>
+    </div>
+</div>
+<div class="nav-body-fixed" style="bottom: 95px;" *ngIf="!done_learning && started">
+    <div class="nav-body-fixed-548 w-100pc align-c mg-t-1" *ngIf="isLoaded() && curIdx < cards.length">
+        <div class="fs-1-3 tracking-in-contract-bck cap">
+            <div *ngFor="let t of cards[curIdx].text.split(',')">
+                {{t}}
+            </div>
+        </div>
+        <div class="mg-t-1 slide-in-bottom">
+            <div class="shape-box shape-box-inline">
+                <img class="shape-bee" src="assets/img/bee1.png">
+                <div class="shape-d">
+                    <div class="shape-title">Part of Speech</div>
+                    <div class="shape-desc">{{cards[curIdx].partOfSpeech}}</div>
+                </div>  
+            </div>
+            <div class="shape-box shape-box-inline">
+                <img class="shape-bee" src="assets/img/bee1.png">
+                <div class="shape-d">
+                    <div class="shape-title">Synonym</div>
+                    <div class="shape-desc">{{cards[curIdx].synonym}}</div>
+                </div>  
+            </div>
+            <div class="shape-box shape-box-inline w-85-pc">
+                <img class="shape-bee" src="assets/img/bee1.png">
+                <div class="shape-d">
+                    <div class="shape-title">Definition</div>
+                    <div class="shape-desc">{{cards[curIdx].definition}}</div>
+                </div>  
+            </div>
+            <div class="shape-box shape-box-inline w-85-pc">
+                <img class="shape-bee" src="assets/img/bee1.png">
+                <div class="shape-d">
+                    <div class="shape-title">Example</div>
+                    <div class="shape-desc">{{cards[curIdx].example}}</div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-ctrl-box" *ngIf="!done_learning && started">
+    <div class="footer-ctrl">
+        <i class="fas fa-volume-up sound" ontouchstart="" (click)="audioCtrl.play()"></i>
+    </div>
+    <span class="footer-ctrl-l" *ngIf="curIdx > 0" (click)="prevCard()"><span class="expand-effect">Previous</span></span>
+    <span class="footer-ctrl-r" *ngIf="curIdx < cards.length - 1" (click)="nextCard()"><span class="expand-effect">Next</span></span>
+    <span class="footer-ctrl-r" *ngIf="curIdx == cards.length - 1" (click)="finish()"><span class="expand-effect">Finish</span></span>
+</div>
+
+<loader-no-bg *ngIf="isLoading()"></loader-no-bg>
+<retry *ngIf="isRetry()" (retry)="retryReq()"></retry>
+<loader *ngIf="submit_loading"></loader>
+<msg-box #msgBox></msg-box>

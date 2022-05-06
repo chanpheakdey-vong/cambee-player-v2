@@ -1,0 +1,24 @@
+<div class="nav-body nav-body-548 slide-in-bottom">
+    <div class="align-c">
+        <div class="mg-t-1 whoa">
+            <span class="t">W</span>
+            <span class="t">H</span>
+            <span class="t">O</span>
+            <span class="t">A</span>
+            <span class="t">!</span>
+            <img class="bee bee1" src="assets/img/bee1.png" />
+            <img class="bee bee2" src="assets/img/bee2.png" />
+        </div>        
+        <div class="fs-1-3">You have learned a set.</div>
+        <div class="mg-tb-2 align-c">    
+            <div class="in-block">
+                <img class="f-i" src="assets/img/f1.png" />
+                <button class="btn-inline btn-w" (click)="back()">Practice Later</button>
+            </div>
+            <div class="in-block">
+                <img class="f-i" src="assets/img/f2.png" />
+                <button class="btn-inline btn-w" routerLink="/practice-set" [queryParams]="{type: 'practice', backnum: 2}" queryParamsHandling="merge">Practice Now</button>
+            </div>
+        </div>
+    </div>
+</div>
