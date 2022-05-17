@@ -74,7 +74,7 @@
             </div>
             <div class="footer-ctrl-box">
                 <div class="footer-ctrl">
-                    <i class="fas fa-volume-up sound" (click)="audioCtrl.play()"></i>
+                    <i class="fas fa-volume-up sound" (click)="playLearningCard()"></i>
                 </div>
                 <span class="footer-ctrl-r" (click)="backPractice()"><span class="expand-effect">Back</span></span>
             </div>
@@ -87,7 +87,7 @@
                         <div class="mg-tb-2">Spell the word 
                         </div>        
                         <div class="pad-1">
-                            <i class="fas fa-volume-up sound mg-r-03" style="vertical-align: top;" (click)="audioCtrl.play()"></i>
+                            <i class="fas fa-volume-up sound mg-r-03" style="vertical-align: top;" (click)="playSpellingCard()"></i>
                             <div class="def-box" *ngIf="card_spelling[curIdx_spelling]" style="min-height: 80px;">{{card_spelling[curIdx_spelling].definition}}</div>
                             <div class="mg-t-2">
                                 <input autofocus #txt type="password" class="input txt" name="txtvalue" autocapitalize="off" autocomplete="off" spellcheck="false"

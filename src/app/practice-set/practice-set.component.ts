@@ -354,4 +354,16 @@ export class PracticeSetComponent {
     back() {
         history.go(this.backnum * -1);
     }
+
+    playSpellingCard() {
+        this.audService.loadSrc(this.audioCtrl.nativeElement, this.card_spelling[this.curIdx_spelling].audio);
+    }
+
+    playLearningCard() {
+        if (this.done_meaning) {
+            this.audService.loadSrc(this.audioCtrl.nativeElement, this.card_spelling[this.card_spelling.length - 1].audio);
+        } else {
+            this.audService.loadSrc(this.audioCtrl.nativeElement, this.card_meaning[this.card_meaning.length - 1].audio);
+        }       
+    }
 }
