@@ -167,4 +167,8 @@ export class LearningSetComponent {
             this.msgBox.setShow(true);
         });
     }
+
+    play() {
+        this.audService.loadSrc(this.audioCtrl.nativeElement, this.cards[this.curIdx].audio);
+    }
 }

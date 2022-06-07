@@ -54,7 +54,7 @@
 </div>
 <div class="footer-ctrl-box" *ngIf="!done_learning && started">
     <div class="footer-ctrl">
-        <i class="fas fa-volume-up sound" ontouchstart="" (click)="audioCtrl.play()"></i>
+        <i class="fas fa-volume-up sound" ontouchstart="" (click)="play()"></i>
     </div>
     <span class="footer-ctrl-l" *ngIf="curIdx > 0" (click)="prevCard()"><span class="expand-effect">Previous</span></span>
     <span class="footer-ctrl-r" *ngIf="curIdx < cards.length - 1" (click)="nextCard()"><span class="expand-effect">Next</span></span>
