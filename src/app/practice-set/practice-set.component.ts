@@ -366,4 +366,12 @@ export class PracticeSetComponent {
             this.audService.loadSrc(this.audioCtrl.nativeElement, this.card_meaning[this.card_meaning.length - 1].audio);
         }       
     }
+
+    getTotalCards() {
+        return this.card_meaning.length + this.card_spelling.length;
+    }
+
+    getCardNo() {
+        return this.done_meaning ? (this.card_meaning.length + this.curIdx_spelling + 1) : this.curIdx_meaning + 1;
+    }
 }
