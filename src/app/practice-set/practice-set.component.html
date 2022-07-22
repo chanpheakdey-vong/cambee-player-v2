@@ -18,7 +18,7 @@
                     <div>Choose the Correct Word</div>
                 </div>
                 <div class="slide-in-bottom" *ngIf="loaded_next">
-                    <div class="align-c">{{card_meaning[curIdx_meaning].definition}}</div>
+                    <div class="align-c fs-1-2">{{card_meaning[curIdx_meaning].definition}}</div>
                     <div class="mg-t-1 shape-set-box">
                         <div class="shape-box choice-set" *ngFor="let c of card_meaning[curIdx_meaning].choice" [class.correct]="c.correct" [class.incorrect]="c.correct == false" (click)="checkAnswer(card_meaning[curIdx_meaning], c)">
                             <div class="hex"><span class="fill"></span>{{c.text}}</div>

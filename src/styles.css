@@ -968,6 +968,10 @@ input:invalid, textarea:invalid, select:invalid{
     font-size: 1.3em;
 }
 
+.fs-1-2 {
+    font-size: 1.2em;
+}
+
 .fs-1-7 {
     font-size: 1.7em;
 }

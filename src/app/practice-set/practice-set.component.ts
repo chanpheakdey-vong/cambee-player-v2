@@ -175,6 +175,8 @@ export class PracticeSetComponent {
                         completed: d.completed
                     });
                 })
+                this.shuffle(this.card_meaning);
+                this.shuffle(this.card_spelling);
             }
             this.loaded_card = true;
             setTimeout(() => {
@@ -189,7 +191,6 @@ export class PracticeSetComponent {
     }
 
     shuffle(arr: any) {
-		if (arr.length > 0 && arr[0].length > 2 && arr[0].substring(1,2) === ".") return
 		let j,tmp
 		for(let i=arr.length-1; i>0; i--){
 			j = Math.floor(Math.random() * (i+1))

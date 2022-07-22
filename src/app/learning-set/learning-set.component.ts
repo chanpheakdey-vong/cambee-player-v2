@@ -66,6 +66,16 @@ export class LearningSetComponent {
         if (this.audService.retry) this.audService.getAudio(this.level, this.set);
     }
 
+    shuffle(arr: any) {
+		let j,tmp
+		for(let i=arr.length-1; i>0; i--){
+			j = Math.floor(Math.random() * (i+1))
+			tmp = arr[i]
+			arr[i] = arr[j]
+			arr[j] = tmp
+		}
+	}
+
     getCard() {
         this.retry = false;
         this.loaded = false;
@@ -94,6 +104,7 @@ export class LearningSetComponent {
                         completed: d.completed
                     });
                 })
+                this.shuffle(this.cards)
             }
             this.loaded = true;
             setTimeout(() => {
